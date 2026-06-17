@@ -577,6 +577,12 @@ body {
   transform: translateY(0);
 }
 
+.proposal p {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .proposal-text {
   font-family: 'Dancing Script', cursive;
   font-size: 1.12rem;
