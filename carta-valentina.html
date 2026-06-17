@@ -267,19 +267,19 @@
       </div>
 
       <!-- Proposal section -->
-      <div class="proposal" id="proposal">
-        <div class="proposal-text">Hoy quiero empezar preguntándote si estás dispuesta a escribir una linda historia junto a mí. No significa novios por el momento, pero sí significa que tenemos algo, algo especial que vale la pena explorar, cuidar y sentir sin prisa.</div>
-        <div class="proposal-question">¿Aceptas dar este lindo paso junto a mí? 💙</div>
+      <div class="proposal" id="proposal" style="margin-top:36px;padding-top:28px;border-top:1px solid rgba(80,160,255,0.2);text-align:center;opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;">
+        <div style="font-family:'Dancing Script',cursive;font-size:1.12rem;line-height:1.85;color:#c4dcf5;margin-bottom:20px;text-align:left;">Hoy quiero empezar preguntándote si estás dispuesta a escribir una linda historia junto a mí. No significa novios por el momento, pero sí significa que tenemos algo, algo especial que vale la pena explorar, cuidar y sentir sin prisa.</div>
+        <div style="font-family:'Dancing Script',cursive;font-size:1.45rem;font-weight:700;color:#6bc8ff;margin-bottom:26px;text-shadow:0 0 20px rgba(80,190,255,0.4);">¿Aceptas dar este lindo paso junto a mí? 💙</div>
 
-        <button class="proposal-reveal-btn" id="proposal-reveal-btn" onclick="showAnswers()">Dar respuesta 💙</button>
+        <button id="proposal-reveal-btn" onclick="showAnswers()" style="background:linear-gradient(135deg,#1455cc,#2882ff);color:#fff;border:none;padding:14px 44px;border-radius:50px;font-family:'Lato',sans-serif;font-size:1rem;font-weight:700;letter-spacing:1px;cursor:pointer;box-shadow:0 8px 28px rgba(30,120,255,0.45);">Dar respuesta 💙</button>
 
-        <div class="answer-btns" id="answer-btns" style="display:none">
-          <a class="answer-yes" href="https://wa.me/573017653449?text=S%C3%AD%2C%20acepto%20dar%20este%20lindo%20paso%20junto%20a%20ti%20%F0%9F%92%99" target="_blank" rel="noopener">Sí 💙</a>
-          <button class="answer-no" id="answer-no" onclick="handleNo()">No</button>
+        <div id="answer-btns" style="display:none;gap:24px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:20px;position:relative;min-height:70px;">
+          <a href="https://wa.me/573017653449?text=S%C3%AD%2C%20acepto%20dar%20este%20lindo%20paso%20junto%20a%20ti%20%F0%9F%92%99" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#1455cc,#2882ff);color:#fff;border:none;padding:14px 50px;border-radius:50px;font-family:'Lato',sans-serif;font-size:1.05rem;font-weight:700;text-decoration:none;box-shadow:0 8px 28px rgba(30,120,255,0.45);">Sí 💙</a>
+          <button id="answer-no" onclick="handleNo()" style="background:rgba(255,255,255,0.07);color:#90aac8;border:1px solid rgba(120,160,220,0.25);padding:14px 50px;border-radius:50px;font-family:'Lato',sans-serif;font-size:1.05rem;cursor:pointer;position:relative;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);">No</button>
         </div>
 
-        <div class="waiting-msg" id="waiting-msg" style="display:none">
-          <div>Estoy dispuesto a esperarte, respetarte y enamorarte hasta que tu corazón esté dispuesto 💙</div>
+        <div id="waiting-msg" style="display:none;margin-top:24px;padding:20px 24px;background:rgba(80,160,255,0.08);border-radius:16px;border:1px solid rgba(80,160,255,0.2);">
+          <div style="font-family:'Dancing Script',cursive;font-size:1.25rem;color:#6bc8ff;line-height:1.8;">Estoy dispuesto a esperarte, respetarte y enamorarte hasta que tu corazón esté dispuesto 💙</div>
         </div>
       </div>
 
