@@ -577,10 +577,12 @@ body {
   transform: translateY(0);
 }
 
-.proposal p {
-  opacity: 1;
-  transform: none;
-  transition: none;
+.proposal p,
+.proposal div.proposal-text,
+.proposal div.proposal-question {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 .proposal-text {
