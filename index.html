@@ -382,79 +382,68 @@ body {
 .overlay::-webkit-scrollbar-track { background: rgba(255,255,255,.04); border-radius: 10px; }
 .overlay::-webkit-scrollbar-thumb { background: rgba(80,180,255,.35); border-radius: 10px; }
 
-/* ── FLOATING POLAROIDS (main screen) ── */
+/* ── FLOATING POLAROIDS ── */
 .polaroid-wrap {
   position: fixed;
-  z-index: 12;
-  pointer-events: none;
+  z-index: 999;
 }
-.pol-1 { top: 50%;  left: 2%;  transform: translateY(-50%); }
-.pol-2 { top: 12%;  right: 2%; }
-.pol-3 { bottom: 12%; right: 2%; }
+
+/* izquierda, centrado vertical */
+.pol-1 { left: 20px; top: 50%; transform: translateY(-50%); }
+/* derecha, centrado vertical */
+.pol-2 { right: 20px; top: 50%; transform: translateY(-50%); }
+/* abajo centrado */
+.pol-3 { bottom: 20px; left: 50%; transform: translateX(-50%); }
 
 .polaroid {
   background: #fff;
-  padding: 10px 10px 36px;
+  padding: 10px 10px 34px;
   border-radius: 3px;
-  box-shadow: 0 12px 40px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.08);
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.7),
+    0 0 25px rgba(80,170,255,.35);
   position: relative;
-  transition: transform .4s ease;
+  cursor: pointer;
 }
+
 .polaroid img {
-  width: 160px;
-  height: 160px;
+  width: 155px;
+  height: 155px;
   object-fit: cover;
   display: block;
-  border-radius: 1px;
-  filter: brightness(.9) saturate(1.1);
 }
+
 .polaroid .pol-label {
   position: absolute;
   bottom: 8px; left: 0; right: 0;
   text-align: center;
   font-family: 'Dancing Script', cursive;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #555;
 }
-/* glow border on polaroids */
-.polaroid::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 4px;
-  background: linear-gradient(135deg, rgba(80,180,255,.4), rgba(140,100,255,.3), rgba(80,180,255,.2));
-  z-index: -1;
-  filter: blur(6px);
-  opacity: .8;
-}
 
-/* individual tilt + float animations */
-.pol-1 .polaroid { transform: rotate(-7deg); animation: pol-float-1 6s   ease-in-out infinite; }
-.pol-2 .polaroid { transform: rotate(5deg);  animation: pol-float-2 7.5s ease-in-out infinite; }
-.pol-3 .polaroid { transform: rotate(-3deg); animation: pol-float-3 5.5s ease-in-out infinite; }
+/* individual tilt + float */
+.pol-1 .polaroid { animation: pol-float-1 6s   ease-in-out infinite; }
+.pol-2 .polaroid { animation: pol-float-2 7.5s ease-in-out infinite; }
+.pol-3 .polaroid { animation: pol-float-3 5.5s ease-in-out infinite; }
 
 @keyframes pol-float-1 {
-  0%,100% { transform: rotate(-7deg) translateY(0px); }
-  50%      { transform: rotate(-5deg) translateY(-14px); }
+  0%,100% { transform: rotate(-6deg) translateY(0px); }
+  50%      { transform: rotate(-4deg) translateY(-12px); }
 }
 @keyframes pol-float-2 {
-  0%,100% { transform: rotate(5deg) translateY(0px); }
-  50%      { transform: rotate(3deg) translateY(-18px); }
+  0%,100% { transform: rotate(5deg)  translateY(0px); }
+  50%      { transform: rotate(3deg)  translateY(-16px); }
 }
 @keyframes pol-float-3 {
-  0%,100% { transform: rotate(-3deg) translateY(0px); }
-  50%      { transform: rotate(-5deg) translateY(-10px); }
+  0%,100% { transform: rotate(-2deg) translateY(0px); }
+  50%      { transform: rotate(2deg)  translateY(-10px); }
 }
 
-/* on medium screens shrink a bit */
-@media (max-width: 1100px) {
-  .polaroid img { width: 120px; height: 120px; }
-  .polaroid { padding: 8px 8px 28px; }
-}
-
-/* hide polaroids on very small screens */
-@media (max-width: 640px) {
-  .polaroid-wrap { display: none; }
+@media (max-width: 900px) {
+  .pol-1, .pol-2 { display: none; }
+  .pol-3 { bottom: 10px; }
+  .polaroid img { width: 110px; height: 110px; }
 }
 
 /* ── LETTER PHOTO GALLERY ── */
