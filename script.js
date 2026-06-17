@@ -314,7 +314,7 @@ function playMelody() {
 
 // ── 6. OPEN / CLOSE LETTER ───────────────────────────────────────
 
-const PARAGRAPH_IDS = ['p1', 'p2', 'p3', 'p4', 'p5', 'sign', 'letter-gallery'];
+const PARAGRAPH_IDS = ['p1', 'p2', 'p3', 'p4', 'p5', 'sign', 'letter-gallery', 'proposal'];
 const MAIN_SELECTORS = ['.scene', '.bottom-img-wrap', '.title-text'];
 
 function hideMainContent() {
@@ -381,6 +381,41 @@ function openLightbox(src) {
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('show');
 }
+
+// ── 8. PROPOSAL SECTION ─────────────────────────────────────────
+
+let noClickCount = 0;
+
+function showAnswers() {
+  document.getElementById('proposal-reveal-btn').style.display = 'none';
+  document.getElementById('answer-btns').style.display = 'flex';
+}
+
+function handleNo() {
+  noClickCount++;
+
+  if (noClickCount >= 6) {
+    document.getElementById('answer-btns').style.display = 'none';
+    document.getElementById('waiting-msg').style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('answer-no');
+  const container = document.getElementById('answer-btns');
+  const containerRect = container.getBoundingClientRect();
+  const btnRect = btn.getBoundingClientRect();
+
+  const maxX = containerRect.width - btnRect.width - 20;
+  const maxY = 60;
+
+  const randomX = (Math.random() - 0.5) * maxX * 1.4;
+  const randomY = (Math.random() - 0.5) * maxY;
+
+  btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+}
+
+
+// ── 9. LIGHTBOX ──────────────────────────────────────────────────
 
 document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
 document.getElementById('lightbox').addEventListener('click', function (e) {
