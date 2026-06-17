@@ -694,10 +694,15 @@ function playMelody(){
 
 /* ── 6. OPEN / CLOSE ── */
 const PARA_IDS=['p1','p2','p3','p4','p5','sign','letter-gallery'];
+const mainEls=['.scene','.bottom-img-wrap','.title-text'];
+function hideMain(){ mainEls.forEach(s=>{ const el=document.querySelector(s); if(el)el.style.visibility='hidden'; }); }
+function showMain(){ mainEls.forEach(s=>{ const el=document.querySelector(s); if(el)el.style.visibility=''; }); }
+
 function openLetter(){
   const env=document.getElementById('envelope');
   env.classList.add('opening');
   setTimeout(()=>{
+    hideMain();
     document.getElementById('overlay').classList.add('show');
     launchConfetti();playMelody();
     PARA_IDS.forEach((id,i)=>{
@@ -708,6 +713,7 @@ function openLetter(){
 function closeLetter(){
   document.getElementById('overlay').classList.remove('show');
   document.getElementById('envelope').classList.remove('opening');
+  showMain();
   PARA_IDS.forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('visible');});
 }
 
