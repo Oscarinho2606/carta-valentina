@@ -381,6 +381,162 @@ body {
 .overlay::-webkit-scrollbar { width: 4px; }
 .overlay::-webkit-scrollbar-track { background: rgba(255,255,255,.04); border-radius: 10px; }
 .overlay::-webkit-scrollbar-thumb { background: rgba(80,180,255,.35); border-radius: 10px; }
+
+/* ── FLOATING POLAROIDS (main screen) ── */
+.polaroid-wrap {
+  position: fixed;
+  z-index: 5;
+  pointer-events: none;
+}
+.polaroid-wrap:nth-child(1) { top: 12%; left: 3%;  }
+.polaroid-wrap:nth-child(2) { top: 8%;  right: 3%; }
+.polaroid-wrap:nth-child(3) { bottom: 10%; left: 5%; }
+
+.polaroid {
+  background: #fff;
+  padding: 10px 10px 36px;
+  border-radius: 3px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.08);
+  position: relative;
+  transition: transform .4s ease;
+}
+.polaroid img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-radius: 1px;
+  filter: brightness(.9) saturate(1.1);
+}
+.polaroid .pol-label {
+  position: absolute;
+  bottom: 8px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1rem;
+  color: #555;
+}
+/* glow border on polaroids */
+.polaroid::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(80,180,255,.4), rgba(140,100,255,.3), rgba(80,180,255,.2));
+  z-index: -1;
+  filter: blur(6px);
+  opacity: .8;
+}
+
+/* individual tilt + float animations */
+.polaroid-wrap:nth-child(1) .polaroid {
+  transform: rotate(-7deg);
+  animation: pol-float-1 6s ease-in-out infinite;
+}
+.polaroid-wrap:nth-child(2) .polaroid {
+  transform: rotate(5deg);
+  animation: pol-float-2 7.5s ease-in-out infinite;
+}
+.polaroid-wrap:nth-child(3) .polaroid {
+  transform: rotate(-3deg);
+  animation: pol-float-3 5.5s ease-in-out infinite;
+}
+
+@keyframes pol-float-1 {
+  0%,100% { transform: rotate(-7deg) translateY(0px); }
+  50%      { transform: rotate(-5deg) translateY(-14px); }
+}
+@keyframes pol-float-2 {
+  0%,100% { transform: rotate(5deg) translateY(0px); }
+  50%      { transform: rotate(3deg) translateY(-18px); }
+}
+@keyframes pol-float-3 {
+  0%,100% { transform: rotate(-3deg) translateY(0px); }
+  50%      { transform: rotate(-5deg) translateY(-10px); }
+}
+
+/* hide polaroids on very small screens */
+@media (max-width: 640px) {
+  .polaroid-wrap { display: none; }
+}
+
+/* ── LETTER PHOTO GALLERY ── */
+.letter-gallery {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(80,160,255,.2);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.letter-gallery.visible { opacity: 1; transform: translateY(0); }
+
+.gal-item {
+  background: #fff;
+  padding: 8px 8px 30px;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.6);
+  position: relative;
+  transition: transform .3s ease, box-shadow .3s ease;
+  cursor: pointer;
+}
+.gal-item:nth-child(1) { transform: rotate(-4deg); }
+.gal-item:nth-child(2) { transform: rotate(1deg) translateY(-6px); }
+.gal-item:nth-child(3) { transform: rotate(4deg); }
+.gal-item:hover { transform: rotate(0deg) scale(1.08) translateY(-8px) !important; box-shadow: 0 20px 50px rgba(0,0,0,.7), 0 0 30px rgba(80,180,255,.3); }
+.gal-item img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(.92) saturate(1.1);
+}
+.gal-item .gal-label {
+  position: absolute;
+  bottom: 6px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: .9rem;
+  color: #666;
+}
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.92);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+.lightbox.show { display: flex; animation: overlay-in .3s ease; }
+.lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 0 60px rgba(80,180,255,.3);
+  animation: letter-pop .4s cubic-bezier(.34,1.56,.64,1);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity .2s;
+  background: none;
+  border: none;
+  line-height: 1;
+}
+.lightbox-close:hover { opacity: 1; }
 </style>
 </head>
 <body>
@@ -396,6 +552,32 @@ body {
 </div>
 
 <div class="float-hearts" id="float-hearts"></div>
+
+<!-- ── FLOATING POLAROIDS (main screen) ── -->
+<div class="polaroid-wrap">
+  <div class="polaroid">
+    <img src="imagen1.jpg" alt="foto">
+    <span class="pol-label">💙</span>
+  </div>
+</div>
+<div class="polaroid-wrap">
+  <div class="polaroid">
+    <img src="imagen2.jpg" alt="foto">
+    <span class="pol-label">✨</span>
+  </div>
+</div>
+<div class="polaroid-wrap">
+  <div class="polaroid">
+    <img src="imagen3.jpg" alt="foto">
+    <span class="pol-label">🌟</span>
+  </div>
+</div>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 <!-- ── MAIN SCREEN ── -->
 <div class="wrap">
@@ -447,6 +629,22 @@ body {
     <p id="p5">Así que cuando te asalten las dudas, recuerda esto: <span class="hl">yo te elijo</span>, con todo lo que eres. Y pienso seguir eligiéndote, hoy, mañana, y todos los días que vengan.</p>
 
     <p class="sign" id="sign">Con todo lo que siento por ti 💙<br>— Oscar</p>
+
+    <!-- ── PHOTO GALLERY inside letter ── -->
+    <div class="letter-gallery" id="letter-gallery">
+      <div class="gal-item" onclick="openLightbox('imagen1.jpg')">
+        <img src="imagen1.jpg" alt="foto">
+        <span class="gal-label">💙</span>
+      </div>
+      <div class="gal-item" onclick="openLightbox('imagen2.jpg')">
+        <img src="imagen2.jpg" alt="foto">
+        <span class="gal-label">✨</span>
+      </div>
+      <div class="gal-item" onclick="openLightbox('imagen3.jpg')">
+        <img src="imagen3.jpg" alt="foto">
+        <span class="gal-label">🌟</span>
+      </div>
+    </div>
 
     <button class="close-btn" id="close-btn">Cerrar 💙</button>
   </div>
@@ -724,7 +922,7 @@ function playMelody() {
 /* ──────────────────────────────────────────────
    6. OPEN / CLOSE LETTER
    ────────────────────────────────────────────── */
-const PARA_IDS = ['p1','p2','p3','p4','p5','sign'];
+const PARA_IDS = ['p1','p2','p3','p4','p5','sign','letter-gallery'];
 
 function openLetter() {
   const env = document.getElementById('envelope');
@@ -765,6 +963,21 @@ document.getElementById('overlay').addEventListener('click', function(e) {
 document.getElementById('envelope').addEventListener('touchend', e => {
   e.preventDefault();
   openLetter();
+});
+
+/* ──────────────────────────────────────────────
+   7. LIGHTBOX
+   ────────────────────────────────────────────── */
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+}
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
 });
 </script>
 </body>
