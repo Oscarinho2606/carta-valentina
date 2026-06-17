@@ -388,9 +388,9 @@ body {
   z-index: 12;
   pointer-events: none;
 }
-.polaroid-wrap:nth-child(1) { top: 50%; left: 2%;  transform: translateY(-50%); }
-.polaroid-wrap:nth-child(2) { top: 18%; right: 2%; }
-.polaroid-wrap:nth-child(3) { bottom: 14%; right: 2%; }
+.pol-1 { top: 50%;  left: 2%;  transform: translateY(-50%); }
+.pol-2 { top: 12%;  right: 2%; }
+.pol-3 { bottom: 12%; right: 2%; }
 
 .polaroid {
   background: #fff;
@@ -429,18 +429,9 @@ body {
 }
 
 /* individual tilt + float animations */
-.polaroid-wrap:nth-child(1) .polaroid {
-  transform: rotate(-7deg);
-  animation: pol-float-1 6s ease-in-out infinite;
-}
-.polaroid-wrap:nth-child(2) .polaroid {
-  transform: rotate(5deg);
-  animation: pol-float-2 7.5s ease-in-out infinite;
-}
-.polaroid-wrap:nth-child(3) .polaroid {
-  transform: rotate(-3deg);
-  animation: pol-float-3 5.5s ease-in-out infinite;
-}
+.pol-1 .polaroid { transform: rotate(-7deg); animation: pol-float-1 6s   ease-in-out infinite; }
+.pol-2 .polaroid { transform: rotate(5deg);  animation: pol-float-2 7.5s ease-in-out infinite; }
+.pol-3 .polaroid { transform: rotate(-3deg); animation: pol-float-3 5.5s ease-in-out infinite; }
 
 @keyframes pol-float-1 {
   0%,100% { transform: rotate(-7deg) translateY(0px); }
@@ -560,19 +551,19 @@ body {
 <div class="float-hearts" id="float-hearts"></div>
 
 <!-- ── FLOATING POLAROIDS (main screen) ── -->
-<div class="polaroid-wrap">
+<div class="polaroid-wrap pol-1">
   <div class="polaroid">
     <img src="imagen1.jpg" alt="foto">
     <span class="pol-label">💙</span>
   </div>
 </div>
-<div class="polaroid-wrap">
+<div class="polaroid-wrap pol-2">
   <div class="polaroid">
     <img src="imagen2.jpg" alt="foto">
     <span class="pol-label">✨</span>
   </div>
 </div>
-<div class="polaroid-wrap">
+<div class="polaroid-wrap pol-3">
   <div class="polaroid">
     <img src="imagen3.jpg" alt="foto">
     <span class="pol-label">🌟</span>
